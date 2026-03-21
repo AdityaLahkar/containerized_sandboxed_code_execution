@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Pattern;
 
 public class CodeRequest {
 
-    @Pattern(regexp = "^(c|C)$", message = "Only 'c is supported")
+    @NotBlank(message = "Invalid language")
     private String language;
 
     @NotBlank(message = "Code cannot be null or empty")

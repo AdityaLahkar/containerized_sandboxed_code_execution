@@ -1,4 +1,4 @@
-# Containerized Sandboxed Code Executor 🚀
+# SandCode 🚀
 
 A highly secure, robust, and extensible REST API for executing untrusted user code in isolated Docker containers. Built with **Spring Boot** and **Java**, this project is designed to evaluate raw code snippets (like C, C++, Java, Python) safely on a host machine by leveraging container isolation, strict resource quotas, and stream pipeline management.
 
@@ -17,6 +17,12 @@ The core architecture follows a **synchronous execution model**. When a request 
 
 ### 🧩 The Strategy Pattern (SOLID)
 Adhering to the Open/Closed Principle, the execution logic is heavily abstracted using the **Strategy Pattern**. The core `ExecutorService` acts as an orchestrator and holds no language-specific compilation logic. Adding support for a new language only requires injecting a new `@Component` that implements `LanguageStrategy`—automatically discovered by the Spring `StrategyFactory` without touching legacy core code.
+
+### 💻 Frontend (SandCode UI)
+SandCode natively ships with a premium, zero-dependency IDE interface served directly from the Spring Boot static resources directory.
+- **Modern Responsive Design:** A sleek dark-mode aesthetic utilizing bespoke CSS, dynamic hover states, and seamless layout handling.
+- **Dynamic Payload Routing:** Uses native REST API `fetch()` pipelines to asynchronously submit user-code to the backend (`POST /api/run`) and render output natively without hard reloading.
+- **XSS Payload Defense:** Uses proactive regex text-serialization filtering to protect the browser terminal from rendering malicious HTML or `<script>` outputs maliciously compiled inside Docker.
 
 ---
 

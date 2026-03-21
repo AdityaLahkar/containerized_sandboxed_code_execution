@@ -1,0 +1,195 @@
+/* Global Variables for a dynamic Dark Mode design */
+:root {
+    --bg-color: #0d1117;
+    --pane-bg: #161b22;
+    --border-color: #30363d;
+    --text-primary: #c9d1d9;
+    --text-muted: #8b949e;
+    --accent-color: #58a6ff;
+    --success-color: #3fb950;
+    --error-color: #f85149;
+    --font-ui: 'Inter', sans-serif;
+    --font-code: 'Fira Code', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    height: 100vh;
+    overflow: hidden; /* Prevents scrollbars on the body */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container {
+    width: 95vw;
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1400px; /* Locks max width for ultra-wide monitors */
+}
+
+/* ----------------HEADER---------------- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.highlight {
+    color: var(--accent-color); /* Makes the "Exec" part glow blue */
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Language Dropdown */
+.styled-select {
+    background: var(--pane-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease; /* Micro-animation */
+}
+
+.styled-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
+}
+
+/* Run Button */
+.run-btn {
+    background: linear-gradient(135deg, var(--success-color), #2ea043);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: var(--font-ui);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.run-btn:hover {
+    transform: translateY(-2px); /* Makes button physically float up on hover */
+    box-shadow: 0 6px 16px rgba(63, 185, 80, 0.3); /* Adds green glow */
+}
+
+.run-btn:active {
+    transform: translateY(0); /* Pushes down when clicked */
+}
+
+.run-btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    animation: pulse 1.5s infinite;
+}
+
+/* ----------------WORKSPACE---------------- */
+.editor-workspace {
+    display: flex;
+    gap: 20px;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+/* Base structural properties for both left/right windows */
+.editor-pane, .output-pane {
+    background: var(--pane-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3); /* Premium depth shadow */
+}
+
+.editor-pane { flex: 3; } /* Takes 60% of screen */
+.output-pane { flex: 2; } /* Takes 40% of screen */
+
+/* The top bar of the windows */
+.pane-header {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+
+.pane-title {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-left: auto;
+    letter-spacing: 0.5px;
+}
+
+.editor-pane .pane-title {
+    margin-left: 15px;
+    margin-right: auto;
+}
+
+/* ----------------INTERACTIVE ZONES---------------- */
+.code-editor {
+    flex-grow: 1;
+    background: transparent;
+    color: var(--text-primary);
+    border: none;
+    padding: 20px;
+    font-family: var(--font-code);
+    font-size: 1rem;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+}
+
+.terminal-output {
+    flex-grow: 1;
+    padding: 20px;
+    font-family: var(--font-code);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    overflow-y: auto;
+    white-space: pre-wrap; /* Preserves newlines (\n) exactly as they come from Docker */
+    color: var(--text-primary);
+}
+
+/* Output Color Coding */
+.welcome-msg { color: var(--text-muted); font-style: italic; }
+.error-msg { color: var(--error-color); }
+.success-msg { color: var(--success-color); }
+
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 0.4; }
+    100% { opacity: 0.7; }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SandCode</title>
+    <!-- Premium UI typography from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Toolbar -->
+        <header class="app-header">
+            <h1>Sand<span class="highlight">Code</span></h1>
+            <div class="controls">
+                <!-- Our dropdown perfectly maps to the StrategyFactory names -->
+                <select id="language-select" class="styled-select">
+                    <option value="c">C (GCC)</option>
+                    <option value="cpp">C++ (G++)</option>
+                    <option value="java">Java (OpenJDK)</option>
+                    <option value="python">Python (CPython)</option>
+                </select>
+                <!-- Run Button -->
+                <button id="run-btn" class="run-btn">
+                    <!-- Play icon SVG -->
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 3l14 9-14 9V3z" fill="currentColor"/>
+                    </svg>
+                    Run Code
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="editor-workspace">
+            
+            <!-- Code Editor Side -->
+            <div class="editor-pane">
+                <div class="pane-header">
+                    <span class="pane-title">source_code</span>
+                </div>
+                <!-- We use a basic textarea but styled to mimic an IDE -->
+                <textarea id="code-editor" class="code-editor" spellcheck="false" placeholder="// Write your code here..."></textarea>
+            </div>
+
+            <!-- Terminal Output Side -->
+            <div class="output-pane">
+                <div class="pane-header">
+                    <span class="pane-title">Terminal Output</span>
+                </div>
+                <div id="terminal-output" class="terminal-output">
+                    <div class="welcome-msg">Awaiting Execution...</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+    
+    <!-- Link to our execution logic -->
+    <script src="app.js"></script>
+</body>
+</html>
