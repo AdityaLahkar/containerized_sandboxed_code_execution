@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Change UI state to let user know it's working
         runBtn.classList.add('loading');
         runBtn.innerHTML = 'Executing...';
-        terminalOutput.innerHTML = '<span class="welcome-msg">Submitting payload to Sandbox...</span>';
+        terminalOutput.innerHTML = '<span class="welcome-msg">Running...</span>';
 
         try {
             // Because our frontend and backend run on the exact same server (localhost:8080)
