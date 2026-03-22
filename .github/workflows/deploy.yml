@@ -1,0 +1,22 @@
+name: Remote Deploy
+
+on:
+  push:
+    branches: [ main ] # Only runs when you push to the master/main branch!
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/containerized_sandboxed_code_execution
+            git pull
+            cd code
+            ./mvnw clean package -DskipTests
+            sudo systemctl restart sandcode
