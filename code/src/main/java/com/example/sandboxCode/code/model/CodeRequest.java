@@ -1,7 +1,6 @@
 package com.example.sandboxCode.code.model;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 
 public class CodeRequest {
 

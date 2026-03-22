@@ -50,18 +50,21 @@ public class ExecutorService{
         }
 
         try {
-            return runCodeInDocker(dirPath, strategy);
+            return runCodeInDocker(jobId, dirPath, strategy);
         } finally {
-            cleanup(dirPath);
+            cleanup(jobId, dirPath);
         }
     }
 
-    private CodeResponse runCodeInDocker(Path dirPath, LanguageStrategy strategy){
+    private CodeResponse runCodeInDocker(String jobId, Path dirPath, LanguageStrategy strategy){
 
         List<String> command = new ArrayList<>(Arrays.asList(
                 "docker", "run", "--rm",
+                "--name", "sandbox_" + jobId,
                 "--network", "none",
+                "--log-driver=none",
                 "--memory", "128m",
+                "--storage-opt", "size=50m",
                 "--cpus", "0.5",
                 "--pids-limit", "16",
                 "-v", dirPath.toAbsolutePath() + ":/app:ro", // Read-only mount!
@@ -120,13 +123,19 @@ public class ExecutorService{
         }
     }
 
-    private void cleanup(Path dirPath) {
+    private void cleanup(String jobId, Path dirPath) {
+        try {
+            Process process = new ProcessBuilder("docker", "rm", "-f", "sandbox_" + jobId).start();
+            process.waitFor(5, TimeUnit.SECONDS);
+        } catch (Exception ignored) {}
+
         try {
             Files.walk(dirPath)
                     .sorted(java.util.Comparator.reverseOrder())
                     .map(Path::toFile)
                     .forEach(File::delete);
         } catch (Exception ignored) {}
+        
     }
 
 }
