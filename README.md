@@ -1,6 +1,8 @@
-# SandCode 🚀
+# SandCode 
 
 A REST API for executing untrusted user code in isolated Docker containers. Built with **Spring Boot** and **Java**, this project is designed to evaluate raw code snippets (like C, C++, Java, Python)(current version 1.0 is limited to C only) safely on a host machine by leveraging container isolation, strict resource quotas, and stream pipeline management.
+
+**Live Demo:** [http://ec2-98-130-0-27.ap-south-2.compute.amazonaws.com/](http://ec2-98-130-0-27.ap-south-2.compute.amazonaws.com/)
 
 ## 🏗 System Architecture & Design (V1.0)
 
