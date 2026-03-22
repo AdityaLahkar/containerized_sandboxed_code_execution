@@ -13,7 +13,7 @@ jobs:
         with:
           host: ${{ secrets.HOST_IP }}
           username: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.AWSEC2_SSH_SECRET_KEY }}
           script: |
             cd ~/containerized_sandboxed_code_execution
             git pull
