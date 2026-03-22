@@ -24,6 +24,15 @@ SandCode natively ships with a premium, zero-dependency IDE interface served dir
 - **Modern Responsive Design:** A sleek dark-mode aesthetic utilizing bespoke CSS, dynamic hover states, and seamless layout handling.
 - **Dynamic Payload Routing:** Uses native REST API `fetch()` pipelines to asynchronously submit user-code to the backend (`POST /api/run`) and render output natively without hard reloading.
 - **XSS Payload Defense:** Uses proactive regex text-serialization filtering to protect the browser terminal from rendering malicious HTML or `<script>` outputs maliciously compiled inside Docker.
+- **Production Fortification:** The API is deployed on a Linux VPS behind a **Caddy Reverse Proxy**, handling SSL termination and protecting the internal Port 8080. The application is managed by **Systemd**, ensuring automatic recovery and persistence across server reboots.
+
+---
+
+## 🏗 Infrastructure & Deployment
+- **Cloud Provider:** AWS EC2 (`m7i-flex.large` in Asia Pacific - Hyderabad).
+- **Process Manager:** Systemd (runs as a non-privileged background service).
+- **Reverse Proxy:** Caddy (handles Port 80 -> 8080 mapping and request buffering).
+- **Base Image:** Ubuntu 24.04 LTS.
 
 ---
 
