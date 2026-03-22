@@ -64,7 +64,6 @@ public class ExecutorService{
                 "--network", "none",
                 "--log-driver=none",
                 "--memory", "128m",
-                "--storage-opt", "size=50m",
                 "--cpus", "0.5",
                 "--pids-limit", "16",
                 "-v", dirPath.toAbsolutePath() + ":/app:ro", // Read-only mount!

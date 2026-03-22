@@ -9,7 +9,7 @@ The core architecture follows a **synchronous execution model**. When a request 
 ### 🛡 Core Security & Isolation Principles
 - **Ephemeral Containers:** Every execution triggers a fresh `docker run --rm` command. The container is completely obliterated upon exit.
 - **Strict Resource Limits:** Containers are locked down using `CPUs` (e.g., `0.5` cores), `Memory` (e.g., `128m`), and process IDs (`--pids-limit 16`) to prevent fork-bombs and memory leak attacks against the host.
-- **Disk Protection & Orphan Prevention:** Containers are uniquely tracked by request UUID and explicitly annihilated via `docker rm -f` hook. Logging is completely disabled (`--log-driver=none`) and container filesystems are strictly capped (`--storage-opt size=50m`) to prevent script infinite loops or bloated temporary files from ever consuming host disk space.
+- **Disk Protection & Orphan Prevention:** Containers are uniquely tracked by request UUID and explicitly annihilated via `docker rm -f` hook. Logging is completely disabled (`--log-driver=none`) to prevent script infinite loops from ever consuming host disk space via endless `stdout` streams.
 - **Read-Only Volume Mounts:** Source code is mounted into the container securely via a read-only volume (`:ro`). Compilers generate binaries exclusively in the container's ephemeral internal `/tmp` directory, preventing the container from poisoning the host filesystem.
 - **Network Isolation:** Completely offline execution (`--network none`). Untrusted code cannot trigger webhooks, mine crypto, or pull internet payloads.
 - **Deadlock-Free Stream Handling:** Solves JVM `ProcessBuilder` OS buffer deadlocks by aggressively multiplexing `stdout` and `stderr` streams directly into an asynchronous background reading thread.
